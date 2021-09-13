@@ -55,7 +55,7 @@ After creating the POJO rule, the Business Transaction named `Producer-Send` app
 
 #### Before Custom Correlation
 
-However, it's clear that the messages are not being correlated at the Consumer:
+However, the trace ends at the Kafka Topic, and so it's clear that the messages are not being correlated downstream at the Consumer:
 
 ![business-transaction-flow-map-before](/images/business-transaction-flow-map-before.png)
 
