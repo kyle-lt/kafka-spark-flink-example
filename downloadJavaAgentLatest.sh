@@ -40,8 +40,8 @@ unzip ./JavaAgent.zip -d /opt/appdynamics/java
 cp ./custom-activity-correlation.xml /opt/appdynamics/java/ver*/conf
 
 # Pass in custom log4j, log4j2 config file
-cp ./log4j.xml /opt/appdynamics/java/ver*/conf/logging
-cp ./log4j2.xml /opt/appdynamics/java/ver*/conf/logging
+#cp ./log4j.xml /opt/appdynamics/java/ver*/conf/logging
+#cp ./log4j2.xml /opt/appdynamics/java/ver*/conf/logging
 
 # Remove the zip
 rm -f ./JavaAgent.zip
