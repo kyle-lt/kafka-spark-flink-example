@@ -1,0 +1,36 @@
+<activities>
+	<!-- The activity-demarcator="true" specifies that the instrumentation element 
+		defines the boundary of the continuing transaction and that the correlation 
+		header is read inside of this method. Note: that the transaction begins only 
+		if a correlation header is read -->
+	<consumer activity-demarcator="true">
+		<instrumentation>
+			<!-- This is the boundary of the continuing transaction and also encloses 
+				the point where correlation metadata is read -->
+			<class-name>org.apache.flink.streaming.connectors.kafka.KafkaDeserializationSchema</class-name>
+			<method-name>deserialize</method-name>
+			<match-type>IMPLEMENTS_INTERFACE</match-type>
+		</instrumentation>
+		<correlation>
+			<!-- This is where instrumentation to get payload bearing correlation 
+				metadata. This instrumentation point is inside of transaction boundary specified 
+				above -->
+			<instrumentation>
+				<class-name>org.apache.flink.streaming.connectors.kafka.KafkaDeserializationSchema</class-name>
+				<method-name>extractSingularityHeader</method-name>
+				<match-type>IMPLEMENTS_INTERFACE</match-type>
+			</instrumentation>
+			<!-- payload-pointer specifies where to access the payload -->
+			<payload-pointer name="KafkaDeserializationSchema">
+				<data-gatherer-type>INVOKED</data-gatherer-type>
+				<getter-chain>this</getter-chain>
+				<transformer-type>GETTER_METHODS</transformer-type>
+			</payload-pointer>
+			<!-- payload-operation specifies how to get the singularityheader -->
+			<payload-operation>
+				<access-type>method</access-type>
+				<access-method>getSingularityHeader</access-method>
+			</payload-operation>
+		</correlation>
+	</consumer>
+</activities>
