@@ -41,7 +41,8 @@ services:
       - bridge
 
   kafka-producer:
-    image: kafka-spark-flink-example
+    build: .
+    image: kjtully/kafka-spark-flink-example:latest
     depends_on:
       - kafka
     environment:
@@ -64,7 +65,8 @@ services:
       - bridge
 
   kafka-consumer-flink:
-    image: kafka-spark-flink-example
+    build: .
+    image: kjtully/kafka-spark-flink-example:latest
     depends_on:
       - kafka-producer
     environment:
@@ -86,7 +88,8 @@ services:
       - bridge
 
   #kafka-consumer-kafka:
-    #image: kafka-spark-flink-example
+    #build: .
+    #image: kjtully/kafka-spark-flink-example:latest
     #depends_on:
       #- kafka-producer
     #environment:
@@ -108,7 +111,8 @@ services:
       #- bridge
 
   #kafka-consumer-spark:
-    #image: kafka-spark-flink-example
+    #build: .
+    #image: kjtully/kafka-spark-flink-example:latest
     #depends_on:
       #- kafka-producer
     #ports:
